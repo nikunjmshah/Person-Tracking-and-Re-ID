@@ -1,0 +1,19 @@
+#
+Install Pillow version 6.1 as latest version has no support for:
+
+ImportError: cannot import name 'PILLOW_VERSION' from 'PIL' (/home/yogesh/anaconda3/envs/torchreid/lib/python3.7/site-packages/PIL/__init__.py)
+
+#
+
+Download market1501 data from drive
+
+#
+
+instead of this:
+conda install pytorch torchvision cudatoolkit=9.0 -c pytorch
+do this:
+conda install pytorch torchvision cudatoolkit -c pytorch
+
+#
+
+
