@@ -3,11 +3,11 @@ Person Tracking and Person Re-identification for Surveillance in Multi-Camera Sy
 
 Pre-requiste - Clone this repository at a suitable location
 
-Steps for running the Tracking program:
+## Steps for running the Tracking program:
 1.
 2.
 
-Steps for running the Re-ID program:
+## Steps for running the Re-ID program:
 1.
 2.
 
