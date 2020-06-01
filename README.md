@@ -1,7 +1,7 @@
 # Person-Tracking-and-Re-ID
 Person Tracking and Person Re-identification for Surveillance in Multi-Camera Systems
 
-Pre-requiste - Clone this repository at a suitable location
+Pre-requisite - Clone this repository at a suitable location
 
 ## Steps for running the Tracking program:
 1.
