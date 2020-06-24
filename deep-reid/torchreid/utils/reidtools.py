@@ -114,6 +114,7 @@ def visualize_ranked_results(
                 matched = gpid == qpid
                 if data_type == 'image':
                     border_color = GREEN if matched else RED
+                    border_color = BLUE
                     gimg = cv2.imread(gimg_path)
                     print(gimg_path)
                     gimg = cv2.resize(gimg, (width, height))

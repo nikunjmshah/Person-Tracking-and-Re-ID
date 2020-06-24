@@ -6,7 +6,7 @@ import cv2
 import requests
 #from pyimagesearch.face_detect import face
 class CentroidTracker:
-	def __init__(self, maxDisappeared=40, maxDistance=100):
+	def __init__(self, maxDisappeared=40, maxDistance=100, basename = 'id'):
 		# initialize the next unique object ID along with two ordered
 		# dictionaries used to keep track of mapping a given object
 		# ID to its centroid and number of consecutive frames it has
@@ -17,6 +17,7 @@ class CentroidTracker:
 		self.numberOfFrameToSave_counter=OrderedDict()
 		self.path=OrderedDict()
 		self.capture=OrderedDict()
+		self.base = basename
 
 		# store the number of maximum consecutive frames a given
 		# object is allowed to be marked as "disappeared" until we
@@ -74,7 +75,7 @@ class CentroidTracker:
 		del self.capture[objectID]
 
 
-	def saveRect(self, objectID,rects,frame):
+	def saveRect(self, objectID, rects, frame):
 		#print('hi')
 		height, width = frame.shape[:2]
 		(startX, startY, endX, endY) = rects
@@ -91,7 +92,7 @@ class CentroidTracker:
 
 		#print(int(startY),int(endY),int(startX),int(endX))
 		#print(objectID)
-		name_to_save='gallery/id_'+str(objectID)+"_"+str(self.numberOfFrameToSave_counter[objectID])+'.jpg'
+		name_to_save='gallery/' + self.base + "_" + str(objectID) + "_" + str(self.numberOfFrameToSave_counter[objectID]) + '.jpg'
 		cv2.imwrite(name_to_save,crop_img)
 
 	def update(self, rects,frame):

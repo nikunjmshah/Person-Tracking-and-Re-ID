@@ -57,8 +57,8 @@ model_proto='/home/nms/people-counting/mobilenet_ssd/MobileNetSSD_deploy.prototx
 #input='/home/ncair/Downloads/people-counting-opencv/videos/example_01.mp4'
 #input="rtsp://admin:transit@123@10.185.151.208/"
 input=args['input']
-confidence=0.5
-skip_frames=10
+confidence=0.4
+skip_frames=5
 contact_limit = 200
 
 
@@ -78,7 +78,7 @@ CLASSES = ["background", "aeroplane", "bicycle", "bird", "boat",
 print("[INFO] loading model...")
 net = cv2.dnn.readNetFromCaffe(model_proto, model_caffe)
 net.setPreferableBackend(cv2.dnn.DNN_BACKEND_OPENCV);
-net.setPreferableTarget(cv2.dnn.DNN_TARGET_OPENCL)
+# net.setPreferableTarget(cv2.dnn.DNN_TARGET_OPENCL)
 # if a video path was not supplied, grab a reference to the webcam
 
 vs = cv2.VideoCapture(input)

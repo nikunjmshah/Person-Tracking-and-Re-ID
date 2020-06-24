@@ -9,6 +9,8 @@
 #	--model mobilenet_ssd/MobileNetSSD_deploy.caffemodel \
 #	--output output/webcam_output.avi
 
+
+
 # import the necessary packages
 from pyimagesearch.centroidtracker import CentroidTracker
 from pyimagesearch.trackableobject import TrackableObject
@@ -21,10 +23,17 @@ import time
 import dlib
 import cv2
 import requests
+import os
+import shutil
+from matplotlib import pyplot as plt
 
 import sys, os
-sys.path.append('/home/nms/darknet/python/')
+sys.path.append('../darknet_old/python/')
 import darknet as dn
+
+# remove and create gallery directory
+shutil.rmtree('gallery', ignore_errors=True)
+os.mkdir('gallery')
 
 # construct the argument parse and parse the arguments
 # '''
@@ -33,9 +42,9 @@ ap = argparse.ArgumentParser()
 # 	help="path to Caffe 'deploy' prototxt file")
 # ap.add_argument("-m", "--model", required=True,
 # 	help="path to Caffe pre-trained model")
-# ap.add_argument("-i", "--input", type=str,
-# 	help="path to optional input video file")
-ap.add_argument("-o", "--output", type=str,
+ap.add_argument("-i", "--input", type=str, default="videos/sample1.mp4",
+	help="path to optional input video file")
+ap.add_argument("-o", "--output", type=str, 
 	help="path to optional output video file")
 # ap.add_argument("-c", "--confidence", type=float, default=0.4,
 # 	help="minimum probability to filter weak detections")
@@ -43,20 +52,26 @@ ap.add_argument("-o", "--output", type=str,
 # 	help="# of skip frames between detections")
 args = vars(ap.parse_args())
 # '''
-model_cfg=b'/home/nms/people-counting/yolo/yolov2.cfg'
-model_wgt=b'/home/nms/people-counting/yolo/yolov2.weights'
+model_cfg=b'yolo/yolov3-tiny.cfg'
+model_wgt=b'yolo/yolov3-tiny.weights'
 #model_cfg='/home/ncair/Downloads/people-counting-opencv/yolov3-coco/frozen_tiny_yolo_v3.xml'
 #model_wgt='/home/ncair/Downloads/people-counting-opencv/yolov3-coco/frozen_tiny_yolo_v3.bin'
 
 #input='/home/ncair/Desktop/Counter/people.mp4'
 input="rtsp://admin:transit@123@10.185.151.213/"
-input="/home/nms/people-counting/videos/sample1.mp4"
+input="videos/sample1.mp4"
+input=args["input"]
 thresh=0.5
-skip_frames=10
+skip_frames=5
 nms_thresh = 0.3
 max_width_resize = 600
 max_disappeared = 20
 max_distance = 40
+
+# base filename from path
+base = os.path.basename(input)
+base = base.split(".")[0]
+print(base)
 
 # load our serialized model from disk
 print("[INFO] loading model...")
@@ -80,7 +95,7 @@ H = None
 # instantiate our centroid tracker, then initialize a list to store
 # each of our dlib correlation trackers, followed by a dictionary to
 # map each unique object ID to a TrackableObject
-ct = CentroidTracker(maxDisappeared = max_disappeared, maxDistance = max_distance)
+ct = CentroidTracker(maxDisappeared = max_disappeared, maxDistance = max_distance, basename = base)
 trackers = []
 trackableObjects = {}
 
@@ -303,12 +318,17 @@ while True:
 			writer.write(frame)
 		
 		# show the output frame
-		cv2.imshow("Frame", frame)
-		key = cv2.waitKey(1) & 0xFF
+        # cv2.imshow("Frame", frame)
+		#imgrgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+		#plt.figure(1); plt.clf()
+		#plt.imshow(imgrgb)
+		#plt.show()
+		#plt.pause(1)
+		# key = cv2.waitKey(1) & 0xFF
 
 		# if the `q` key was pressed, break from the loop
-		if key == ord("q"):
-			break
+		#if key == ord("q"):
+		#	break
 
 		# increment the total number of frames processed thus far and
 		# then update the FPS counter
@@ -321,4 +341,4 @@ print("[INFO] elapsed time: {:.2f}".format(fps.elapsed()))
 print("[INFO] approx. FPS: {:.2f}".format(fps.fps()))
 
 vs.release()
-cv2.destroyAllWindows()
+# cv2.destroyAllWindows()

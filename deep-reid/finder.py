@@ -50,15 +50,16 @@ class NewDataset(ImageDataset):
         # print(q_files)
         for file in q_files:
             filename = file.split('.')[0]
-            query.append([q_dir + file, int(filename.split('_')[0]), int(filename.split('_')[1])])
+            query.append([q_dir + file, int(filename.split('_')[1]), filename.split('_')[0]])
         # print(query)
 
         gallery = []
         g_files = os.listdir(g_dir)
-        # print(q_files)
+        # print(g_files)
         for file in g_files:
             filename = file.split('.')[0]
-            gallery.append([g_dir + file, int(filename.split('_')[0]), int(filename.split('_')[1])])
+            # print(filename)
+            gallery.append([g_dir + file, int(filename.split('_')[1]), filename.split('_')[0]])
         # print(query)
 
 
@@ -72,7 +73,7 @@ torchreid.data.register_image_dataset('Test_dataset', NewDataset)
 
 datamanager = torchreid.data.ImageDataManager(
     root='reid-data',
-    sources='market1501',
+    sources='Test_dataset',
     targets='Test_dataset',
     height=256,
     width=128,
@@ -82,10 +83,10 @@ datamanager = torchreid.data.ImageDataManager(
 )
 
 #    Build model, optimizer and lr_scheduler
-
+# market1501 train ids = 751
 model = torchreid.models.build_model(
     name='resnet50',
-    num_classes=datamanager.num_train_pids,
+    num_classes=751,
     loss='softmax',
     pretrained=True
 )
