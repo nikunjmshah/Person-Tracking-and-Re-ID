@@ -49,17 +49,19 @@ class NewDataset(ImageDataset):
         q_files = os.listdir(q_dir)
         # print(q_files)
         for file in q_files:
-            filename = file.split('.')[0]
-            query.append([q_dir + file, int(filename.split('_')[1]), filename.split('_')[0]])
+            if file.endswith(".jpg"):
+                filename = file.split('.')[0]
+                query.append([q_dir + file, int(filename.split('_')[1]), filename.split('_')[0]])
         # print(query)
 
         gallery = []
         g_files = os.listdir(g_dir)
         # print(g_files)
         for file in g_files:
-            filename = file.split('.')[0]
-            # print(filename)
-            gallery.append([g_dir + file, int(filename.split('_')[1]), filename.split('_')[0]])
+            if file.endswith(".jpg"):
+                filename = file.split('.')[0]
+                # print(filename)
+                gallery.append([g_dir + file, int(filename.split('_')[1]), filename.split('_')[0]])
         # print(query)
 
 
@@ -121,7 +123,7 @@ engine = torchreid.engine.ImageSoftmaxEngine(
 torchreid.utils.load_pretrained_weights(model, 'log/resnet50/model.pth.tar-60')
 
 engine.run(
-    save_dir='log/resnet50',
+    save_dir='reid-data/',
     max_epoch=60,
     eval_freq=10,
     print_freq=10,

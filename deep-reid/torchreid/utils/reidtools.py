@@ -13,6 +13,7 @@ QUERY_EXTRA_SPACING = 90
 BW = 5 # border width
 GREEN = (0, 255, 0)
 RED = (0, 0, 255)
+BLUE = (255, 0, 0)
 
 
 def visualize_ranked_results(
@@ -80,6 +81,7 @@ def visualize_ranked_results(
         qimg_path_name = qimg_path[0] if isinstance(
             qimg_path, (tuple, list)
         ) else qimg_path
+        print('Matches for ' + osp.basename(qimg_path) + ' are:')
 
         if data_type == 'image':
             qimg = cv2.imread(qimg_path)
@@ -116,7 +118,7 @@ def visualize_ranked_results(
                     border_color = GREEN if matched else RED
                     border_color = BLUE
                     gimg = cv2.imread(gimg_path)
-                    print(gimg_path)
+                    print(osp.basename(gimg_path))
                     gimg = cv2.resize(gimg, (width, height))
                     gimg = cv2.copyMakeBorder(
                         gimg,
