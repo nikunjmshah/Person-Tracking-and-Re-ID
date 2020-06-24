@@ -13,6 +13,8 @@ Pre-requisite - Clone this repository at a suitable location
 1.
 2.
 
+## Run it on colab:
+Colaboratory: https://colab.research.google.com/drive/1P2_OQ1ERhmGr5TNIkzMKqqhH7ss2LaQs?usp=sharing
 
-For more details:
+## For more details:
 Webpage: http://homepages.iitb.ac.in/~15d100004/
