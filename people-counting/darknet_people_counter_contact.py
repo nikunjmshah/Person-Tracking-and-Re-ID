@@ -30,7 +30,7 @@ shutil.rmtree('contacts/', ignore_errors=True)
 os.mkdir('contacts/')
 
 import sys, os
-sys.path.append('/home/nms/darknet/python/')
+sys.path.append('../darknet_old/python/')
 import darknet as dn
 
 # construct the argument parse and parse the arguments
@@ -40,8 +40,8 @@ ap = argparse.ArgumentParser()
 # 	help="path to Caffe 'deploy' prototxt file")
 # ap.add_argument("-m", "--model", required=True,
 # 	help="path to Caffe pre-trained model")
-# ap.add_argument("-i", "--input", type=str,
-# 	help="path to optional input video file")
+ap.add_argument("-i", "--input", type=str, default="videos/sample1.mp4",
+ 	help="path to optional input video file")
 ap.add_argument("-o", "--output", type=str,
 	help="path to optional output video file")
 # ap.add_argument("-c", "--confidence", type=float, default=0.4,
@@ -50,14 +50,15 @@ ap.add_argument("-o", "--output", type=str,
 # 	help="# of skip frames between detections")
 args = vars(ap.parse_args())
 # '''
-model_cfg=b'/home/nms/people-counting/yolo/yolov2.cfg'
-model_wgt=b'/home/nms/people-counting/yolo/yolov2.weights'
+model_cfg=b'yolo/yolov3.cfg'
+model_wgt=b'yolo/yolov3.weights'
 #model_cfg='/home/ncair/Downloads/people-counting-opencv/yolov3-coco/frozen_tiny_yolo_v3.xml'
 #model_wgt='/home/ncair/Downloads/people-counting-opencv/yolov3-coco/frozen_tiny_yolo_v3.bin'
 
 #input='/home/ncair/Desktop/Counter/people.mp4'
 input="rtsp://admin:transit@123@10.185.151.213/"
 input="/home/nms/people-counting/videos/sample1.mp4"
+input=args["input"]
 thresh=0.5
 skip_frames=5
 nms_thresh = 0.3
@@ -325,12 +326,12 @@ while True:
 			writer.write(frame)
 		
 		# show the output frame
-		cv2.imshow("Frame", frame)
-		key = cv2.waitKey(1) & 0xFF
+		# cv2.imshow("Frame", frame)
+		# key = cv2.waitKey(1) & 0xFF
 
 		# if the `q` key was pressed, break from the loop
-		if key == ord("q"):
-			break
+		# if key == ord("q"):
+		#	 break
 
 		# increment the total number of frames processed thus far and
 		# then update the FPS counter
