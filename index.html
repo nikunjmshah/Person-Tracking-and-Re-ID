@@ -67,17 +67,18 @@ and is wrapped around the whole page content, except for the footer in this exam
 <ol class="c15 lst-kix_utw33nadvxik-0 start" start="1"><li class="c6 c8"><span class="c4 c3">Define model weights and parameters:</span></li></ol><p class="c6 c12">
 <img src="images/image10.png" alt="Nature" style="display: block; margin-left: 0px; margin-right: auto; title=""" 
      </p>
-	    <script src="https://gist.github.com/nikunjmshah/4e7df167338a10d82215cf3c7ee2cdfc.js"></script>
+	    <script src="https://gist.github.com/nikunjmshah/4e7df167338a10d82215cf3c7ee2cdfc.js?file=${define_weights.py}"></script>
 
 <ol class="c15 lst-kix_utw33nadvxik-0" start="2"><li class="c6 c8"><span class="c4 c3">Load the model:</span></li></ol><p class="c6 c12">
 <img src="images/image3.png" alt="Nature" style="display: block; margin-left: 0px; margin-right: auto; title=""" >
 </p>
-
+<script src="https://gist.github.com/nikunjmshah/4e7df167338a10d82215cf3c7ee2cdfc.js?file=${load_weights.py}"></script>
 
 <ol class="c15 lst-kix_utw33nadvxik-0" start="3"><li class="c6 c8"><span class="c4 c3">Finally run the model to get output detection:</span></li></ol><p class="c6 c12">
 <img src="images/image8.png" alt="Nature" style="display: block; margin-left: 0px; margin-right: auto; title=""" >
 </p>
-
+<script src="https://gist.github.com/nikunjmshah/4e7df167338a10d82215cf3c7ee2cdfc.js?file=${run_model.py}"></script>
+	    
 <p class="c6"><span class="c4 c3">&nbsp;</span></p><h5 class="c7" id="h.rzv5oknyjm4p"><span><b>Implementation details for Yolo (This is also SSD): </b></span></h5><p class="c2"><span class="c3">For yolo we need to clone the official repository from darknet (Reference: </span><span class="c5 c3"><a class="c1" href="https://www.google.com/url?q=https://github.com/pjreddie/darknet&amp;sa=D&amp;ust=1590343048043000">Darknet</a></span><span class="c3">). Same is also available </span><span class="c5 c3"><a class="c1" href="https://www.google.com/url?q=https://github.com/nikunjmshah/Person-Tracking-and-Re-ID/tree/master/darknet&amp;sa=D&amp;ust=1590343048043000">here</a></span><span class="c4 c3">&nbsp;with necessary modification and weights for our project.</span></p><p class="c0"><span class="c4 c3"></span></p><p class="c6"><span class="c4 c3">Once it is cloned we need to &lsquo;make&rsquo; the module after some modifications in Makefile as follows:</span></p><ul class="c15 lst-kix_hj7exgifwgtn-0 start"><li class="c2 c8"><span class="c4 c3">If we need to use GPU resources and have appropriate (Cuda) software installed, we can set GPU = 1</span></li><li class="c6 c8"><span class="c4 c3">Also set OPENMP = 1 to use process parallelization on CPU</span></li><li class="c6 c8"><span class="c4 c3">Set OPENCV = 1 to compile darknet with opencv (optional)</span></li></ul><p class="c2 c16"><span class="c4 c3"></span></p><p class="c2"><span class="c3">Once we have successfully executed the &lsquo;make&rsquo; command we can test and run &lsquo;yolo&rsquo; model for object detection. Note one would also need to download appropriate weights from </span><span class="c5 c3"><a class="c1" href="https://www.google.com/url?q=https://pjreddie.com/darknet/yolo/&amp;sa=D&amp;ust=1590343048045000">this</a></span><span class="c4 c3">&nbsp;link.</span></p><p class="c0"><span class="c4 c3"></span></p><p class="c6"><span class="c3">Some modifications are required in file python/darknet.py for successful execution of further algorithms. These are already made </span><span class="c5 c3"><a class="c1" href="https://www.google.com/url?q=https://github.com/nikunjmshah/Person-Tracking-and-Re-ID/blob/master/darknet/python/darknet.py&amp;sa=D&amp;ust=1590343048045000">here</a></span><span class="c4 c3">. One can save and replace the original file with this one.</span></p><p class="c0"><span class="c4 c3"></span></p>
 
 <img alt="" src="images/image7.jpg" style="width: 281.66px; height: 212.50px; margin-left: 45px; margin-top: 0.00px; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px);" title="Yolo">
@@ -120,7 +121,7 @@ and is wrapped around the whole page content, except for the footer in this exam
 
 
 <img src="images/image9.png" alt="Nature" style="width:80%; display: block; margin-left: auto; margin-right: auto; title="Metadata generating code"" >
-
+<script src="https://gist.github.com/nikunjmshah/4e7df167338a10d82215cf3c7ee2cdfc.js?file=${metadata_sample.py}"></script>
 
 <p class="c11" style="text-align:center;"><span class="w3-opacity">Fig 4: Metadata generating code</span></p><p class="c0"><span class="c4 c3"></span></p><p class="c6"><span class="c4 c3">For storing images we have a special function in our tracker program to store the snapshot (using OpenCV) whenever a new ID comes in and is in visible range (i.e. approximately in the center of the frame). </span></p><p class="c0"><span class="c4 c3"></span></p><p class="c6"><span class="c4 c3">Examples of generated data are attached as follows:</span></p><ul class="c15 lst-kix_xhx31iuyrp7b-0 start"><li class="c6 c8"><span class="c5 c3"><a class="c1" href="https://www.google.com/url?q=https://github.com/nikunjmshah/Person-Tracking-and-Re-ID/tree/master/people-counting/gallery&amp;sa=D&amp;ust=1590343048057000">Snapshots</a></span></li><li class="c6 c8"><span class="c3 c5"><a class="c1" href="https://www.google.com/url?q=https://github.com/nikunjmshah/Person-Tracking-and-Re-ID/tree/master/people-counting/contacts&amp;sa=D&amp;ust=1590343048057000">Contact Tracing</a></span></li></ul>
 
