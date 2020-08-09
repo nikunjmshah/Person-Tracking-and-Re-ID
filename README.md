@@ -7,7 +7,7 @@ Pre-requisite - Clone this repository at a suitable location
 
 ## Steps for running the Tracking program:
 1. Make by setting appropriate variables in Makefile inside darknet folder 
-2. Chnage working directory to 'people-counting' and empty the 'gallery' folder and 'count.txt' for metadata
+2. Change working directory to 'people-counting' and empty the 'gallery' folder and 'count.txt' for metadata
 3. Run python script 'darknet_people_counter.py' parsing necessary arguments to begin tracking
 4. Output will be stored as 'out.mp4' by default
 5. To use MobileNetSSD for person detection instead of darknet, use 'people_counter.py' in step 3
